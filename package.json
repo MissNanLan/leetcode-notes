@@ -1,0 +1,24 @@
+{
+  "name": "leetcode-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MissNanLan/LeetCode-Notes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MissNanLan/LeetCode-Notes/issues"
+  },
+  "homepage": "https://github.com/MissNanLan/LeetCode-Notes#readme",
+  "dependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-angular": "^13.1.0",
+    "husky": "^7.0.2"
+  }
+}
