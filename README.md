@@ -6,7 +6,7 @@
 
 #### 数组
 
-#### 简单
+##### 简单
 
 1. [数组形式的整数加法](https://github.com/MissNanLan/leetcode-notes/blob/master/source/989/solution.md)
 2. [字符的最短距离](https://github.com/MissNanLan/leetcode-notes/blob/master/source/821/solution.md)
