@@ -51,7 +51,12 @@ https://leetcode-cn.com/problems/add-to-array-form-of-integer/
 
 ## 前置知识
 
-- 求第一个非负整数的个位与第一位分别是求余、除以 10
+- 求第一个非负整数的最低位与最高位分别是求余、除以 10
+- 时间复杂度分析，比如对数阶
+- js 四舍五入的方法
+  - 向上取整 Math.ceil()
+  - 向下取整 Math.floor()
+  - Math.round()
 
 ## 公司
 
@@ -63,7 +68,7 @@ https://leetcode-cn.com/problems/add-to-array-form-of-integer/
 
 ## 关键点
 
-- 两数相加超过 10 怎么用代码表示
+- 两数相加超过 10，进 1 怎么用代码表示
 
 ## 代码
 
@@ -84,10 +89,12 @@ var addToArrayForm = function (n, k) {
     k = Math.floor(k / 10);
     if (sum >= 10) {
       k++;
-      sum = sum - 10;
+      sum = sum % 10;
     }
     res.push(sum);
   }
+  //  1、之前看不懂这段代码，后面仔细想了下。如果k>0的话，则说明加数k最高位与加数最高相加大于10
+  //  2、此时上面的循环已经结束，但是加法运算还没有结束,比如99+19
   for (; k > 0; k = Math.floor(k / 10)) {
     res.push(k % 10);
   }
@@ -99,5 +106,5 @@ var addToArrayForm = function (n, k) {
 
 令 n 为数组长度。
 
-- 时间复杂度：$O(n)$
-- 空间复杂度：$O(n)$
+- 时间复杂度：O(max(n,logk)),其中 n 是数组的长度
+- 空间复杂度：O(1)，除了返回值以外，使用的空间为常数

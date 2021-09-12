@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {number[]}
  */
-
+//  注释的代码是我第一次看得部分，把加数数组num转化为一个整数，然后相加，再转成数组，呜呜
 //  1 <= A.length <= 10000
 //  0 <= A[i] <= 9
 //  0 <= K <= 10000
@@ -59,7 +59,7 @@ var addToArrayForm = function (n, k) {
     k = Math.floor(k / 10);
     if (sum >= 10) {
       k++;
-      sum = sum - 10;
+      sum = sum % 10;
     }
     res.push(sum);
   }
@@ -69,4 +69,4 @@ var addToArrayForm = function (n, k) {
   return res.reverse();
 };
 
-console.log(addToArrayForm([2, 1, 5], 806));
+console.log(addToArrayForm([2, 1], 806));
