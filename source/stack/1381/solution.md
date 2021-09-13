@@ -52,8 +52,8 @@ customStack.pop();                            // 返回 -1 --> 栈为空，返�
 
 ## 前置知识
 
-- 栈先进后出
-- js 原型知识
+- 栈
+- 前缀和
 
 ## 公司
 
@@ -126,3 +126,7 @@ CustomStack.prototype.increment = function (k, val) {
 
 - 时间复杂度：O(k)
 - 空间复杂度：O(maxSize)
+
+## 涉及知识点
+
+- 前缀和
