@@ -63,6 +63,7 @@ https://leetcode-cn.com/problems/decode-string/
 ## 关键点
 
 - 栈
+- repeat 方法
 
 ## 代码
 
@@ -107,3 +108,7 @@ var decodeString = function (s) {
 
 - 时间复杂度：O(n), 一层循环，n 是 s 字符串的长度
 - 空间复杂度： 这里不会分析
+
+## TODO
+
+空间复杂度分析
