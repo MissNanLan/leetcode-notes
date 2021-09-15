@@ -100,4 +100,6 @@ var maxChunksToSorted = function (arr) {
 
 ## TODO
 
-弄清楚到底什么单调栈
+弄清楚到底什么单调栈、块内排序、块的和
+
+此题还可以用滑动窗口、单调栈、计数排序，呜呜
