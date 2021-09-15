@@ -15,10 +15,18 @@
 
 #### 栈
 
+##### 简单
+
+1. [用栈实现队列](https://github.com/MissNanLan/leetcode-notes/blob/master/source/989/232.md)
+
 ##### 中等
 
 1、[设计一个支持增量操作的栈](https://github.com/MissNanLan/leetcode-notes/blob/master/source/1381/solution.md)
 2、[字符串解码](https://github.com/MissNanLan/leetcode-notes/blob/master/source/394/solution.md)
+
+##### 困难
+
+1、[最多能完成排序的块 II](https://github.com/MissNanLan/leetcode-notes/blob/master/source/768/solution.md)
 
 - 链表
 - 树与递归
