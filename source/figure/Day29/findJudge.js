@@ -10,7 +10,6 @@ var findJudge = function (n, trust) {
     G[fr - 1]--;
     G[to - 1]++;
   }
-
   const target = G.indexOf(n - 1);
   console.log(G);
   console.log(target);
