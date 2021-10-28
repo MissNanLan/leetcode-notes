@@ -1,66 +1,42 @@
-/**
- * @param {string} s
- * @param {string} t
- * @return {string}
- */
-var minWindow = function (s, t) {
-    const map = {}
-    const tLen = t.length
-    // 统计t的字符个数
-    for (let i = 0; i < tLen; i++) {
-        const char = t[i];
-        map[char] = map[char] || 0
-        map[char]--
-    }
+const minimumWindowSubstring = function (string, substring) {
+    let answer = ""
+    let map = {}
+    substring.split("").forEach((character) => (map[character] = (map[character] || 0) + 1))
 
-    let len = Infinity
-    let match = 0
-    let resLeft = 0
-    let resRight = 0
-
+    //. count 用来
+    let count = Object.keys(map).length
     let left = 0
-    let right = 0
-
-    while (right < s.length) {
-        const char = s[right]
-        // 当前窗口出现t中的字符时
-        if (char in map) {
-            map[char]++
-            // 有可能出现多个，只有跟t的个数相同才是匹配的部分
-            if (map[char] <= 0) {
-                match++
+    let right = -1
+    while (right < string.length) {
+        // 向左边滑动，可行窗口不覆盖t
+        if (count === 0) {
+            if (!answer || right - left + 1 < answer.length) {
+                answer = string.slice(left, right + 1)
             }
-        }
-
-        // 当相等时，说明当前窗口已经出现t的字符了
-        while (match === tLen) {
-            // 判断当时窗口是否小于上次窗口
-            if (right - left + 1 < len) {
-                len = right - left + 1
-                resLeft = left
-                resRight = right
+            //  首先满足最小子串存在每个t的每个字符
+            if (map[string[left]] !== undefined) {
+                map[string[left]]++
             }
-
-            // 此时需要滑动窗口了，将左指针出窗口
-            const ch = s[left]
-            if (ch in map) {
-                map[ch]--
-                // 小于说明当前窗口中该字符的个数不符合了
-                // 则不匹配计数要减一
-                if (map[ch] < 0) {
-                    match--
-                }
+            if (map[string[left]] > 0) {
+                count++
             }
-            // 移动左指针，收缩窗口
             left++
-        }
+        } else {
+            //  向右边滑动，直到可行窗口全部覆盖t
+            right++
+            //  当count===0的时候，可行窗口全部覆盖t
+            // 当可行窗口中包含t中的字符，则map中对应的字符计数减去1，
+            if (map[string[right]] !== undefined) {
+                map[string[right]]--
+            }
+            if (map[string[right]] === 0) {
+                count--
+            }
 
-        // 扩大窗口
-        right++
+        }
     }
 
-    // 有可能找不到，需要判断是否返回空字符串
-    return len === Infinity ? '' : s.substring(resLeft, resRight + 1);
-};
+    return answer
+}
 
-console.log(minWindow('ABAACBAB', 'ABC'))
+console.log(minimumWindowSubstring('ABBCCDDEE', 'DE'))
