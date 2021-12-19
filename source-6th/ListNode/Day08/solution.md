@@ -1,3 +1,4 @@
+
 ## 题目地址(61. 旋转链表)
 
 https://leetcode-cn.com/problems/rotate-list/
@@ -32,7 +33,7 @@ https://leetcode-cn.com/problems/rotate-list/
 
 ## 前置知识
 
-- 链表
+- 
 
 ## 公司
 
@@ -40,10 +41,13 @@ https://leetcode-cn.com/problems/rotate-list/
 
 ## 思路
 
-## 关键点
+1、 链表的长度怎么求出来，如果是数组那直接是arr.length，链表呢 
+2、 k>n的话，我们这次用m来表示 (m是将尾部向前数第K个元素作为头，原来的头接到原来的尾上)
+3、 环的产生 p.next = head
+4、 移动完之后需要断开链表
 
-- js 怎么实现链表
-- js 怎么构成环列表
+
+## 关键点
 
 ## 代码
 
@@ -52,43 +56,42 @@ https://leetcode-cn.com/problems/rotate-list/
 JavaScript Code:
 
 ```javascript
+
+function ListNode(val, next) {
+    val === undefined ? 0 : val;
+    next === undefined ? null :val
+}
+
+
 var rotateRight = function (head, k) {
-  if (!head || !head.next) {
-    return head;
-  }
+    
+    if (!head || !head.next) return;
 
-  let n = 1;
-  let cur = head;
+    const p = head, n = 1;
+  // 求出链表的长度
+    while (p.next) {
+        p = p.next
+        n++;
+    }
 
-  // 知道cur.next = null结束循环，这个时候cur是最后一个节点
-  while (cur.next !== null) {
-    cur = cur.next;
-    n++;
-  }
+    let m = k- k % n;
+    p.next = head;
 
-  //  找出断开节点的位置
-  let add = n - (k % n);
+    while (m) {
+        p = p.next
+        m--;
+    }
 
-  // 如果k等于n或者n的倍数，则不需要改变
-  if (add === n) {
-    return head;
-  }
+    const ret = cur.next;
+    cur.next = null;
 
-  // 指向head，形成环链表
-  cur.next = head;
+    return ret;
+                                         
+}
 
-  // 真正移动了多少次
-  while (add) {
-    cur = cur.next;
-    add--;
-  }
 
-  //  新的结点指向断开环的位置
-  const ret = cur.next;
-  cur.next = null;
-  return ret;
-};
 ```
+
 
 **复杂度分析**
 
@@ -98,6 +101,3 @@ var rotateRight = function (head, k) {
 
 - 空间复杂度：O(1)，我们只需要常数的空间存储若干变量。
 
-## TODO
-
-快慢指针

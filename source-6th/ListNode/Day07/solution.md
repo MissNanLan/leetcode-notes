@@ -48,9 +48,6 @@ https://leetcode-cn.com/problems/swap-nodes-in-pairs/
 
 解法1 递归
 
-## 关键点
-
--  
 
 ## 代码
 
