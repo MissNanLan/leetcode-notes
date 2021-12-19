@@ -47,7 +47,8 @@ https://leetcode-cn.com/problems/rotate-list/
 4、 移动完之后需要断开链表
 
 
-## 关键点
+![image](https://user-images.githubusercontent.com/22790863/146679147-a75f1b92-ecf5-41c6-9e8f-bf8855bdeb92.png)
+
 
 ## 代码
 
