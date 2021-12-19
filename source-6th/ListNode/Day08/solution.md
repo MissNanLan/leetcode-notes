@@ -41,6 +41,8 @@ https://leetcode-cn.com/problems/rotate-list/
 
 ## 思路
 
+### 闭合为环
+
 1、 链表的长度怎么求出来，如果是数组那直接是arr.length，链表呢 
 
 2、 k>n的话，我们这次用m来表示 (是将尾部向前数第K个元素作为头，原来的头接到原来的尾上)
@@ -105,3 +107,6 @@ var rotateRight = function (head, k) {
 
 - 空间复杂度：O(1)，我们只需要常数的空间存储若干变量。
 
+## TODO
+
+快慢指针
