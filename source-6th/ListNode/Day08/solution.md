@@ -42,8 +42,11 @@ https://leetcode-cn.com/problems/rotate-list/
 ## 思路
 
 1、 链表的长度怎么求出来，如果是数组那直接是arr.length，链表呢 
+
 2、 k>n的话，我们这次用m来表示 (是将尾部向前数第K个元素作为头，原来的头接到原来的尾上)
+
 3、 环的产生 p.next = head
+
 4、 移动完之后需要断开链表
 
 
