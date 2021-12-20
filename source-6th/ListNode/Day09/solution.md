@@ -34,9 +34,8 @@ https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/
 
 ## 思路
 
-## 关键点
+- 双指针法
 
--  
 
 ## 代码
 
@@ -108,7 +107,11 @@ var sortedListToBST = function (head) {
 
 令 n 为数组长度。
 
-- 时间复杂度：$O(n)$
-- 空间复杂度：$O(n)$
+- 时间复杂度：递归树的深度为 logn，每一层的基本操作数为 n，因此总的时间复杂度为O(nlogn)
+- 空间复杂度：空间复杂度为O(logn)
 
 
+## TODO
+
+- 分治
+- 分治 + 中序遍历优化
