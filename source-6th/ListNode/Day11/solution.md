@@ -94,8 +94,6 @@ var detectCycle = function (head) {
 
 ### 方法2 双指针
 
-
-
 ## 代码
 
 - 语言支持：JavaScript
