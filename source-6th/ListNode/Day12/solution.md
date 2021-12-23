@@ -61,7 +61,6 @@ lRUCache.get(4);    // 返回 4
 
 ## 思路
 
-
 ### 使用内置数据结构
 
 
@@ -120,7 +119,7 @@ LRUCache.prototype.put = function (key, value) {
 
 如何删除最久未使用的的数据值
 为啥用双链表
-
+参照官方题解，没完全弄懂
 
 
 ## 代码
@@ -130,30 +129,82 @@ LRUCache.prototype.put = function (key, value) {
 JavaScript Code:
 
 ```javascript
+class DoubleLinkedListNode {
+    constructor(key, value) {
+        this.key = key
+        this.value = value
+        this.prev = null
+        this.next = null
+    }
+}
 
-/**
- * @param {number} capacity
- */
-var LRUCache = function(capacity) {
+class LRUCache {
+    constructor(capacity) {
+        this.capacity = capacity
+        this.usedSpace = 0
+        // Mappings of key->node.
+        this.hashmap = {}
+        this.dummyHead = new DoubleLinkedListNode(null, null)
+        this.dummyTail = new DoubleLinkedListNode(null, null)
+        this.dummyHead.next = this.dummyTail
+        this.dummyTail.prev = this.dummyHead
+    }
 
-};
+    _isFull() {
+        return this.usedSpace === this.capacity
+    }
 
-/** 
- * @param {number} key
- * @return {number}
- */
-LRUCache.prototype.get = function(key) {
+    _removeNode(node) {
+        node.prev.next = node.next
+        node.next.prev = node.prev
+        node.prev = null
+        node.next = null
+        return node
+    }
 
-};
+    _addToHead(node) {
+        const head = this.dummyHead.next
+        node.next = head
+        head.prev = node
+        node.prev = this.dummyHead
+        this.dummyHead.next = node
+    }
 
-/** 
- * @param {number} key 
- * @param {number} value
- * @return {void}
- */
-LRUCache.prototype.put = function(key, value) {
+    get(key) {
+        if (key in this.hashmap) {
+            const node = this.hashmap[key]
+            this._addToHead(this._removeNode(node))
+            return node.value
+        }
+        else {
+            return -1
+        }
+    }
 
-};
+    put(key, value) {
+        if (key in this.hashmap) {
+            // If key exists, update the corresponding node and move it to the head.
+            const node = this.hashmap[key]
+            node.value = value
+            this._addToHead(this._removeNode(node))
+        }
+        else {
+        // If it's a new key.
+            if (this._isFull()) {
+                // If the cache is full, remove the tail node.
+                const node = this.dummyTail.prev
+                delete this.hashmap[node.key]
+                this._removeNode(node)
+                this.usedSpace--
+            }
+            // Create a new node and add it to the head.
+            const node = new DoubleLinkedListNode(key, value)
+            this.hashmap[key] = node
+            this._addToHead(node)
+            this.usedSpace++
+        }
+    }
+}
 
 /**
  * Your LRUCache object will be instantiated and called as such:
@@ -169,7 +220,8 @@ LRUCache.prototype.put = function(key, value) {
 
 令 n 为数组长度。
 
-- 时间复杂度：$O(n)$
-- 空间复杂度：$O(n)$
+- 时间复杂度：对于 put 和 get 都是 O(1)。
+
+- 空间复杂度：O(capacity)，因为哈希表和双向链表最多存储  capacity+1 个元素。
 
 
