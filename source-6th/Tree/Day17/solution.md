@@ -118,3 +118,6 @@ const q = deserialize("1,2,X,X,3,4,X,X,5,X,X")
 
 - 时间复杂度：$O(n)$, n是节点数
 - 空间复杂度：O(h)，其中 h 为树的高度
+
+## TODO
+bfs
