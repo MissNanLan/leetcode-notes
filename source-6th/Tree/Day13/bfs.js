@@ -13,7 +13,7 @@ var maxDepth = function (root) {
         return 0
     }
     let arr = []
-    let heigh = 0
+    let height = 0
  
     arr.push(root)
 
