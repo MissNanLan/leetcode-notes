@@ -76,9 +76,28 @@ JavaScript Code:
  * @param {number[][]} trust
  * @return {number}
  */
-var findJudge = function(n, trust) {
 
-};
+var findJudge = function (n, trust) { 
+  var in_degree = new Array(n+1).fill(0);
+  var out_degree = new Array(n+1).fill(0);
+  for (const [fr, to] of trust) {
+    out_degree[fr]++
+    in_degree[to]++;
+    console.log(out_degree)
+    console.log(in_degree)
+  }
+
+
+  for (let i = 1; i <=n; i++) { 
+    if (in_degree[i] === n-1 && out_degree[i] === 0) { 
+      return i
+    }
+  }
+
+  return -1
+
+}
+
 
 ```
 

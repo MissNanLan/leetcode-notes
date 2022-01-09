@@ -18,15 +18,18 @@
 // };
 
 var findJudge = function (n, trust) { 
-  var in_degree = new Array(n).fill(0);
-  var out_degree = new Array(n).fill(0);
+  var in_degree = new Array(n+1).fill(0);
+  var out_degree = new Array(n+1).fill(0);
   for (const [fr, to] of trust) {
     out_degree[fr]++
     in_degree[to]++;
+    console.log(out_degree)
+    console.log(in_degree)
   }
 
-  for (let i = 0; i < in_degree.length; i++) { 
-    if (in_degree[i] === 0 && out_degree[i] === n - 1) { 
+
+  for (let i = 1; i <=n; i++) { 
+    if (in_degree[i] === n-1 && out_degree[i] === 0) { 
       return i
     }
   }
@@ -34,12 +37,10 @@ var findJudge = function (n, trust) {
   return -1
 
 }
-console.log(
-  findJudge(4, [
-    [1, 3],
-    [1, 4],
-    [2, 3],
-    [2, 4],
-    [4, 3],
-  ])
-);
+
+var G = [
+  [1, 3],
+  [2, 3],
+];
+
+console.log(findJudge(3, G));
