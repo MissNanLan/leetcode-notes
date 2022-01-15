@@ -45,6 +45,10 @@ a 和 b 只由小写字母组成
 
 ## 思路
 
+三个条件中， 条件1和条件2其实是一样的， 比如A 中的 每个字母 在字母表中 严格小于 B 中的 每个字母，交换下A和B的位置就可以了。
+我们要做的就是枚举所有可能的 A 的最大字母 和 B 的最小字母（其中 A 的最大字母保证严格小于 B 的最大字母），并计算操作数，最后取最小值即可。
+
+
 ## 代码
 
 - 语言支持：JavaScript
@@ -64,8 +68,8 @@ var minCharacters = function (a, b) {
   let aa = new Array(26).fill(0);
   let bb = new Array(26).fill(0);
 
-  for (let i = 0; i < m; i++) aa[a.charCodeAt(i) - 97]++;
-  for (let j = 0; j < n; j++) bb[b.charCodeAt(j) - 97]++;
+  for (let i = 0; i < m; i++) aa[a.charCodeAt(i) - 97]++;    // 统计a字符串中每个字符出现的次数
+  for (let j = 0; j < n; j++) bb[b.charCodeAt(j) - 97]++; // 统计b字符串中每个字符出现的次数
 
   let ans = m + n;
   let asum = 0,
@@ -75,17 +79,21 @@ var minCharacters = function (a, b) {
     asum += aa[i];
     bsum += bb[i];
     ans = Math.min(
-      Math.min(ans, m + n - aa[i] - bb[i]),
+      Math.min(ans, m + n - aa[i] - bb[i]), // 我们只需要将 A 和 B 改为同一个字母，并计算出操作数，取最小值即可
       Math.min(m - asum + bsum, n - bsum + asum)
     );
   }
+
+  console.log(asum)
+
+
   return Math.min(ans, m + n - aa[25] - bb[25]);
 };
 ```
 
 **复杂度分析**
 
-令 n 为数组长度。
+令 m, n 分别为数组 A 和数组 B 的长度。
 
-- 时间复杂度：O(n)
-- 空间复杂度：不会分析
+- 时间复杂度：O(m+n)
+- 空间复杂度：O(26)
