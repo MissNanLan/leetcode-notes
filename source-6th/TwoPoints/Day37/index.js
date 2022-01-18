@@ -9,7 +9,6 @@ var mySqrt = function (x) {
     ans = -1;
   while (l <= r) {
       const mid = Math.floor((l + r) / 2)
-    //   const mid = ((l+r)>>2)
     if (mid * mid <= x) {
       ans = mid;
       l = mid + 1;
