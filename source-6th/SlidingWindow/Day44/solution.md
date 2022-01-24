@@ -72,12 +72,27 @@ JavaScript Code:
  * @param {number} maxPts
  * @return {number}
  */
-var new21Game = function (n, k, maxPts) {};
+var new21Game = function (n, k, maxPts) {
+  const dp = new Array(k + maxPts + 2).fill(0);
+
+  let windowSum = 0;
+  for (let i = k; i < k + maxPts; i++) {
+    if (i <= n) dp[i] = 1;
+    windowSum += dp[i];
+  }
+
+  for (let i = k - 1; i >= 0; i--) {
+    dp[i] = windowSum / maxPts;
+    windowSum -= dp[i + maxPts];
+    windowSum += dp[i];
+  }
+
+  return dp[0];
+};
 ```
 
 **复杂度分析**
 
-令 n 为数组长度。
+时间复杂度：O(K+W)
 
-- 时间复杂度：$O(n)$
-- 空间复杂度：$O(n)$
+空间复杂度：O(K+W)
