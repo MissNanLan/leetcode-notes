@@ -1,17 +1,36 @@
-var new21Game = function (n, k, maxPts) {
-    const dp = new Array(k + maxPts + 2).fill(0);
+/**
+ * @param {string} s
+ * @param {string} p
+ * @return {number[]}
+ */
+var findAnagrams = function (s, p) {
+    const sLen = s.length,
+        pLen = p.length;
 
-    let windowSum = 0;
-    for (let i = k; i < k + maxPts; i++) {
-        if (i <= n) dp[i] = 1;
-        windowSum += dp[i];
+    if (sLen < pLen) {
+        return [];
     }
 
-    for (let i = k - 1; i >= 0; i--) {
-        dp[i] = windowSum / maxPts;
-        windowSum -= dp[i + maxPts];
-        windowSum += dp[i];
+    const ans = [];
+    const sCount = new Array(26).fill(0);
+    const pCount = new Array(26).fill(0);
+    for (let i = 0; i < pLen; ++i) {
+        ++sCount[s[i].charCodeAt() - "a".charCodeAt()];
+        ++pCount[p[i].charCodeAt() - "a".charCodeAt()];
     }
 
-    return dp[0];
+    if (sCount.toString() === pCount.toString()) {
+        ans.push(0);
+    }
+
+    for (let i = 0; i < sLen - pLen; ++i) {
+        --sCount[s[i].charCodeAt() - "a".charCodeAt()];
+        ++sCount[s[i + pLen].charCodeAt() - "a".charCodeAt()];
+
+        if (sCount.toString() === pCount.toString()) {
+            ans.push(i + 1);
+        }
+    }
+
+    return ans;
 };

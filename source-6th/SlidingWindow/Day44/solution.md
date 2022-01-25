@@ -1,53 +1,47 @@
-## 题目地址(21-game/">837. 新 21 点)
+## 题目地址(438. 找到字符串中所有字母异位词)
 
-https://leetcode-cn.com/problems/new-21-game/
+https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/
 
 ## 题目描述
 
 ```
-爱丽丝参与一个大致基于纸牌游戏 “21点” 规则的游戏，描述如下：
+给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
 
-爱丽丝以 0 分开始，并在她的得分少于 k 分时抽取数字。 抽取时，她从 [1, maxPts] 的范围中随机获得一个整数作为分数进行累计，其中 maxPts 是一个整数。 每次抽取都是独立的，其结果具有相同的概率。
-
-当爱丽丝获得 k 分 或更多分 时，她就停止抽取数字。
-
-爱丽丝的分数不超过 n 的概率是多少？
-
-与实际答案误差不超过 10-5 的答案将被视为正确答案。
+异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。
 
  
 
-示例 1：
+示例 1:
 
-输入：n = 10, k = 1, maxPts = 10
-输出：1.00000
-解释：爱丽丝得到一张牌，然后停止。
-
-
-示例 2：
-
-输入：n = 6, k = 1, maxPts = 10
-输出：0.60000
-解释：爱丽丝得到一张牌，然后停止。 在 10 种可能性中的 6 种情况下，她的得分不超过 6 分。
+输入: s = "cbaebabacd", p = "abc"
+输出: [0,6]
+解释:
+起始索引等于 0 的子串是 "cba", 它是 "abc" 的异位词。
+起始索引等于 6 的子串是 "bac", 它是 "abc" 的异位词。
 
 
-示例 3：
+ 示例 2:
 
-输入：n = 21, k = 17, maxPts = 10
-输出：0.73278
+输入: s = "abab", p = "ab"
+输出: [0,1,2]
+解释:
+起始索引等于 0 的子串是 "ab", 它是 "ab" 的异位词。
+起始索引等于 1 的子串是 "ba", 它是 "ab" 的异位词。
+起始索引等于 2 的子串是 "ab", 它是 "ab" 的异位词。
 
 
  
 
-提示：
+提示:
 
-0 <= k <= n <= 104
-1 <= maxPts <= 104
+1 <= s.length, p.length <= 3 * 104
+s 和 p 仅包含小写字母
 ```
 
 ## 前置知识
 
--
+一种是利用排序强制顺序，
+另一种就是用哈希表的方法。
 
 ## 公司
 
@@ -67,32 +61,46 @@ JavaScript Code:
 
 ```javascript
 /**
- * @param {number} n
- * @param {number} k
- * @param {number} maxPts
- * @return {number}
+ * @param {string} s
+ * @param {string} p
+ * @return {number[]}
  */
-var new21Game = function (n, k, maxPts) {
-  const dp = new Array(k + maxPts + 2).fill(0);
+var findAnagrams = function (s, p) {
+  const sLen = s.length,
+    pLen = p.length;
 
-  let windowSum = 0;
-  for (let i = k; i < k + maxPts; i++) {
-    if (i <= n) dp[i] = 1;
-    windowSum += dp[i];
+  if (sLen < pLen) {
+    return [];
   }
 
-  for (let i = k - 1; i >= 0; i--) {
-    dp[i] = windowSum / maxPts;
-    windowSum -= dp[i + maxPts];
-    windowSum += dp[i];
+  const ans = [];
+  const sCount = new Array(26).fill(0);
+  const pCount = new Array(26).fill(0);
+  for (let i = 0; i < pLen; ++i) {
+    ++sCount[s[i].charCodeAt() - "a".charCodeAt()];
+    ++pCount[p[i].charCodeAt() - "a".charCodeAt()];
   }
 
-  return dp[0];
+  if (sCount.toString() === pCount.toString()) {
+    ans.push(0);
+  }
+
+  for (let i = 0; i < sLen - pLen; ++i) {
+    --sCount[s[i].charCodeAt() - "a".charCodeAt()];
+    ++sCount[s[i + pLen].charCodeAt() - "a".charCodeAt()];
+
+    if (sCount.toString() === pCount.toString()) {
+      ans.push(i + 1);
+    }
+  }
+
+  return ans;
 };
 ```
 
 **复杂度分析**
 
-时间复杂度：O(K+W)
+令 n 为数组长度。
 
-空间复杂度：O(K+W)
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(n)$
